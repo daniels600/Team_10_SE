@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    unset($_SESSION["User"]);
     $match = "";
     $exist = "";
     $user = "";
@@ -36,13 +38,14 @@
             }
         }
         if ($match == "" & $exist == "") {
-            session_start();
+           
             if($user == "user"){
                 $_SESSION["User"] = array($user,$id["user_id"]);                
             }else{
                 $_SESSION["User"] = array($user,$id["restaurant_id"]);
             }
             // Go to homepage
+       
         }
     }
 ?>
@@ -53,15 +56,7 @@
     </head>
 
     <body>
-        <?php
-            if(!isset($_SESSION)){
-                session_start();
-            }
-            
-            unset($_SESSION["Student"]);
-            unset($_SESSION["Vendor"]);
-            session_destroy();
-		?>
+       
         <div>
             <form name="form">
                 <div>
