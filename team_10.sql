@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2021 at 09:45 AM
+-- Generation Time: Feb 24, 2021 at 06:26 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `menu` (
   `menu_id` int(11) NOT NULL,
-  `restaurant_id` int(11) DEFAULT NULL,
+  `restaurant_id` int(11) NOT NULL,
   `meal_name` varchar(30) NOT NULL,
-  `meal_price` int(11) NOT NULL,
+  `meal_price` decimal(11,0) NOT NULL,
   `meal_image` varchar(120) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,11 +40,11 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`menu_id`, `restaurant_id`, `meal_name`, `meal_price`, `meal_image`) VALUES
-(1, 1, 'Chicken Fingers', 28, NULL),
-(2, 2, 'Chicken Satay', 40, NULL),
-(3, 3, 'Beef Caramelized', 50, NULL),
-(4, 4, 'Spring Rolls Fried', 30, NULL),
-(5, 5, 'Sugarcane Juice', 12, NULL);
+(1, 1, 'Chicken Fingers', '28', NULL),
+(2, 2, 'Chicken Satay', '40', NULL),
+(3, 3, 'Beef Caramelized', '50', NULL),
+(4, 4, 'Spring Rolls Fried', '30', NULL),
+(5, 5, 'Sugarcane Juice', '12', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,7 +170,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `orders`
