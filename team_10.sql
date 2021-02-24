@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2021 at 06:26 PM
+-- Generation Time: Feb 24, 2021 at 07:13 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -54,8 +54,8 @@ INSERT INTO `menu` (`menu_id`, `restaurant_id`, `meal_name`, `meal_price`, `meal
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `restaurant_id` int(11) NOT NULL,
-  `menu_id` int(11) DEFAULT NULL,
+  `menu_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -141,7 +141,6 @@ ALTER TABLE `menu`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `restaurant_id` (`restaurant_id`),
   ADD KEY `menu_id` (`menu_id`);
 
 --
@@ -176,7 +175,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -210,7 +209,6 @@ ALTER TABLE `menu`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`);
 COMMIT;
 

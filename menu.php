@@ -11,6 +11,13 @@
     FROM menu,restaurants WHERE menu.restaurant_id = restaurants.restaurant_id";
     $query = $conn->query($sql);
 
+    if(isset($_GET["order"])){
+        session_start();
+        $order = $_GET["order"];
+        $sql = "INSERT INTO `orders`( `menu_id`, `user_id`) VALUES ($order,".$_SESSION["User"][1].")";
+        $conn->query($sql);
+    }
+
 ?>
 <html>
     <body>
