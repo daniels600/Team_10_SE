@@ -7,8 +7,14 @@
     if(!($conn = new mysqli($servername, $username, $password, $dbname))){
         alert("Connection has failed.");
     } 
+    $search = "";
+    $s = "";
+    if (isset($_GET["Querysearch"])){
+        $s = ucwords($_GET["Querysearch"]); 
+        $search = " and (`meal_name` LIKE '%$s%' OR restaurants.restaurant_name LIKE '%$s%')";
+    }
     $sql = "SELECT menu.menu_id,menu.meal_name, menu.meal_price,restaurants.restaurant_name, menu.meal_image 
-    FROM menu,restaurants WHERE menu.restaurant_id = restaurants.restaurant_id";
+    FROM menu,restaurants WHERE menu.restaurant_id = restaurants.restaurant_id".$search;
     $query = $conn->query($sql);
 
     if(isset($_GET["order"])){
@@ -25,6 +31,8 @@
 <html>
     <body>
         <form>
+            <input type="text" name = "Querysearch" value = '<?php echo $s?>'>
+            <input type= "submit" value ="Search">
             <table>
                 <tr>
                     <th>Meal Name</th>

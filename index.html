@@ -35,12 +35,12 @@
                 </div>
                 <div class="column">
                     <img src="svg/Text.svg" alt="long-text" id="body-text">
-                    <form>
+                    <form action = "menu.php">
                         <input type="text" id="Querysearch" name="Querysearch" placeholder="  type here...">
-                    </form>
-                    <img src="svg/pointer.svg" alt="pointer" id="pointer">
-                    <form>
-                        <input type="submit" class="btn-query" value="Search" name = "Search">
+                    
+                        <img src="svg/pointer.svg" alt="pointer" id="pointer">
+                    
+                        <input type="submit" class="btn-query" value="Search">
                     </form>
                 </div>
                 
