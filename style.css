@@ -1,0 +1,307 @@
+
+/* ----------------------------------------------- */
+/* BASIC SETUP */
+/* ----------------------------------------------- */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+
+}
+
+html{
+    color: #000;
+}
+
+
+/* ----------------------------------------------- */
+/* REUSABLE COMPONENTS */
+/* ----------------------------------------------- */
+header{
+    background-color: rgb(236, 236, 236);
+}
+
+.Logo{
+    margin-left: 5%;
+}
+
+#foodee{
+    margin-right: -6%;
+  }
+
+#pizzaicon{
+    opacity: 0.3;
+}
+
+.main-nav{
+    float: right;
+    list-style: none;
+    margin-top: -48px;
+    margin-right: 15%;
+
+}
+
+.main-nav li{
+    display: inline-block;
+    margin-left: 30px;
+
+}
+
+.main-nav li a{
+    text-decoration: none;
+    color: #1C71FF;
+    font-family: Merriweather;
+    font-weight: bold;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active{
+    background-color: #f87c22;
+    border: solid 1px #f87c22;
+    color:#fff;
+    padding: 6px;
+    transition: 0.3s;
+
+}
+
+/* ----- HEADINGS ----- */
+
+.loader{
+    position:relative;
+    font-size: 2em;
+    background: #fff;
+    color: rgb(255, 162, 22);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: .2em;
+    text-align: center;
+    font-family: Poppins;
+    font-weight: bold;
+    margin-bottom: 30px;
+    
+}
+
+
+.loader span{
+    color: rgb(255, 181, 22);
+    mix-blend-mode: difference;
+}
+
+.loader::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50;
+    width: 80px;
+    height: 100%;
+    background: #f87c22;
+    animation: animate 3s linear infinite;
+}
+
+#whattocho{
+    width: 80%;
+    margin-left: 60px;
+    cursor: text;
+}
+
+#body-text{
+    width: 90%;
+
+}
+
+.column{
+    float: left;
+    width: 50%;
+    padding:10px;
+  }
+
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column #Querysearch{
+    margin-left: 70px;
+    width: 333px;
+    height: 40px;
+    background:#d3d3d3;
+    border:none;
+    border: solid #d3d3d3;
+    color: #716f6f;
+    font-family: "Lucida Handwriting";
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 8px;
+    line-height: 22px;
+}
+
+.column #pointer{
+    margin-left: 270px;
+    margin-top:10px;
+    width: 120px;
+    margin-bottom: -30px;
+}
+
+.btn-query{
+    margin-left: 180px;
+    width: 105.1px;
+    height: 35.1px;
+    border-radius: 8px;
+    background: #f87c22;
+    border: solid #f87c22;
+    color:#fff;
+    font-family: Lato;
+    line-height: 21px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-query:hover,
+.btn-query:active{
+    background-color: #fff;
+    border: solid 1px #1C71FF;
+    color: #f87c22;
+}
+
+
+
+.view-food{
+    background-color: #fff;
+    margin-top: 40px;
+}
+
+
+
+
+/*Animation*/
+@keyframes animate
+{
+    0%
+    {
+        left: 40%;
+    }
+    50%
+    {
+        left: 55%;
+    }
+    100%
+    {
+        left: 40%;
+    }
+}
+/* ----------------------------------------------- */
+/* FOOD VIEW */
+/* ----------------------------------------------- */
+
+.view-food{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+} 
+
+.grid {
+    display: grid;
+    width: 90%;
+    grid-gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+  }
+  
+  .grid-item {
+    background-color: #fff;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  
+  .grid-item:hover {
+    transform: translateY(-0.5%);
+    box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.5);
+  }
+  
+  .card-img {
+    display: block;
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+  }
+  
+  .card-container {
+    padding: 2rem;
+  }
+
+  .card-header {
+    font-size: 26px;
+    font-family: Lato;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-text {
+    font-size: 14px;
+    font-family: Merriweather;
+    letter-spacing: 0.1rem;
+    line-height: 1.7;
+    color: #000;
+    margin-bottom: 1.3rem;
+  }
+  
+  .card-btn {
+    font-family: Lato;
+    width: 117px;
+    height: 35px;
+    font-size: 16px;
+    text-align: center;
+    color: #3363ff;
+    background-color: #fff;
+    border: solid 1px #1C71FF;
+    border-radius: 0.4rem;
+    transition: 0.3s;
+    cursor: pointer;
+    font-weight: 900;
+    letter-spacing: 0.1rem;
+    line-height: 22px;
+    display:flex;
+    justify-content: center;
+  }
+  
+  
+  .card-btn:hover,
+  .card-btn:active {
+    background-color: #1C71FF;
+    border:solid 1px #1c71ff;
+    color:#fff;
+    transition: 0.3s;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  @media only screen and (max-width: 60em) {
+    body {
+      padding: 3rem;
+    }
+  
+    .grid {
+      grid-gap: 3rem;
+    }
+  }
