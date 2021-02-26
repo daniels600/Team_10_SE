@@ -16,10 +16,14 @@
         $sql = "DELETE from orders where order_id = $delete";
         $conn->query($sql);
     }
+    $o ="meal_name";
+    if(isset($_GET["orderby"])){
+        $o =$_GET["orderby"];
+    }
     $sql = "SELECT orders.order_id, menu.meal_name,menu.meal_price,restaurants.restaurant_name, 
     orders.created_at FROM `orders`, `menu` LEFT JOIN restaurants on 
     restaurants.restaurant_id = menu.restaurant_id WHERE menu.menu_id = orders.menu_id 
-    and orders.user_id = ".$_SESSION["User"][1];
+    and orders.user_id = ".$_SESSION["User"][1]." Order By $o";
     $query = $conn->query($sql);
 
     
@@ -30,10 +34,11 @@
         <form>
             <table>
                 <tr>
-                    <th>Meal Name</th>
-                    <th>Meal Price</th>
-                    <th>Restaurant Name</th>
-                    <th>Created At</th>
+                <tr>
+                    <th><button type = "submit" name = 'orderby' value ='meal_name'>Meal Name</button></th>
+                    <th><button type = "submit" name = 'orderby' value ='meal_price'>Meal Price</button</th>
+                    <th><button type = "submit" name = 'orderby' value ='restaurant_name'>Restaurant Name</th>
+                    <th><button type = "submit" name = 'orderby' value ='created_at'>Created At</th>
                 </tr>
                 <?php
                     
