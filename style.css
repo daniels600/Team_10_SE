@@ -53,6 +53,7 @@ header{
     color: #1C71FF;
     font-family: Merriweather;
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .main-nav li a:hover,
@@ -60,7 +61,8 @@ header{
     background-color: #f87c22;
     border: solid 1px #f87c22;
     color:#fff;
-    padding: 6px;
+    padding: 12px;
+    position: relative;
     transition: 0.3s;
 
 }
@@ -149,9 +151,9 @@ header{
     width: 105.1px;
     height: 35.1px;
     border-radius: 8px;
-    background: #f87c22;
-    border: solid #f87c22;
-    color:#fff;
+    background-color: #fff;
+    border: solid 2px #1C71FF;
+    color:#f87c22;
     font-family: Lato;
     line-height: 21px;
     text-align: center;
@@ -162,9 +164,9 @@ header{
 
 .btn-query:hover,
 .btn-query:active{
-    background-color: #fff;
-    border: solid 1px #1C71FF;
-    color: #f87c22;
+    background: #f87c22;
+    border: solid #f87c22;
+    color: #fff;
 }
 
 
