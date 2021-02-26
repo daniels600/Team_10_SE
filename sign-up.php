@@ -26,8 +26,9 @@
             $sql = "INSERT INTO `users`(`user_email`, `user_password`) VALUES ('$email','$pass')";
             $id = $conn->query($sql);
         }
-        
-        header('Location: log-in.php');
+        if(isset($_GET["signup"])){
+            header('Location: log-in.php');
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -68,7 +69,7 @@
                     
                 ?>
                     <div>
-                        <button type="submit" id="popup-btn">Sign Up</button>
+                        <button type="submit" name = "signup" value ="signup" id="popup-btn">Sign Up</button>
                     </div>
                 </div>
 

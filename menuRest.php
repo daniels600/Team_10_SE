@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (!isset($_SESSION["User"])) {
+        header('Location: log-in.php');
+    }
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -7,29 +11,23 @@
     if(!($conn = new mysqli($servername, $username, $password, $dbname))){
         alert("Connection has failed.");
     } 
-    $sql = "SELECT menu.menu_id,menu.meal_name, menu.meal_price,restaurants.restaurant_name, menu.meal_image 
-    FROM menu,restaurants WHERE menu.restaurant_id = restaurants.restaurant_id";
-    $query = $conn->query($sql);
-
-    if(isset($_GET["order"])){
-        session_start();
-        if (!isset($_SESSION["User"])) {
-            header('Location: log-in.php');
-        }
-        $order = $_GET["order"];
-        $sql = "INSERT INTO `orders`( `menu_id`, `user_id`) VALUES ($order,".$_SESSION["User"][1].")";
+    if(isset($_GET["delete"])){
+        $delete= $_GET["delete"];
+        $sql = "DELETE from menu where menu_id = $delete";
         $conn->query($sql);
     }
+    
+    $sql = "SELECT `menu_id`,`meal_name`, `meal_price`, `meal_image` FROM `menu` 
+    WHERE `restaurant_id` = ".$_SESSION["User"][1];
+    $query = $conn->query($sql);
 
 ?>
 <html>
     <body>
-        <form>
             <table>
                 <tr>
                     <th>Meal Name</th>
                     <th>Meal Price</th>
-                    <th>Restaurant Name</th>
                     <th>Picture</th>
                 </tr>
                 <?php
@@ -38,13 +36,12 @@
                         echo "<tr>
                         <td>".$row['meal_name']."</td>
                         <td>".$row['meal_price']."</td>
-                        <td>".$row['restaurant_name']."</td>
                         <td>Image</td>
-                        <td><button type='submit' name ='order' value =".$row['menu_id'].">Order</button></td>
+                        <td><a href = './menuinsert.php?Edit=".$row['menu_id']."'><input type='submit' value =Edit></a></td>
+                        <td><a href = './menuRest.php?delete=".$row['menu_id']."'><input type='submit' value =Delete></a></td>
                         </tr>";
                     }
                 ?>
             </table>
-        <form>
     </body>
 </html>

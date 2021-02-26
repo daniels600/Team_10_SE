@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2021 at 07:13 PM
+-- Generation Time: Feb 26, 2021 at 03:25 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -59,6 +59,13 @@ CREATE TABLE `orders` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `menu_id`, `user_id`, `created_at`) VALUES
+(14, 1, 1, '2021-02-26 02:23:47');
+
 -- --------------------------------------------------------
 
 --
@@ -81,11 +88,18 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`restaurant_id`, `restaurant_location`, `restaurant_name`, `restaurant_telephone`, `restaurant_opening_time`, `restauarant_closing_time`, `Email`, `Password`) VALUES
-(1, '8th Junction, Adabraka', 'ChillsnBites', '0340543230', '08:00:00', '21:00:00', 'chillsnbites@gmail.co ', '12345678'),
+(1, '8th Junction, Adabraka', 'ChillsnBites', '0340543230', '08:00:00', '21:00:00', 'chillsnbites@gmail.com ', '12345678'),
 (2, 'Accra Kasoa ', 'StarBites', '0340543230', '08:00:00', '21:00:00', 'starbites@gmail.com', '12345678'),
 (3, '10 lane, Osu', 'Papaye', '0340543230', '08:00:00', '21:00:00', 'papaye@gmail.com', '12345678'),
 (4, 'Kaneshie, Sanguine krave', 'Sanguine Krave', '0340543230', '08:00:00', '21:00:00', 'sangkrave@gmail.com', '12345678'),
-(5, 'Alliance Francaise, Airport', 'Papa Cuisine', '0340543230', '08:00:00', '21:00:00', 'papacuisine@gmail.com', '12345678');
+(5, 'Alliance Francaise, Airport', 'Papa Cuisine', '0340543230', '08:00:00', '21:00:00', 'papacuisine@gmail.com', '12345678'),
+(7, '', '', '', '00:00:00', '00:00:00', '', ''),
+(8, '', '', '', '00:00:00', '00:00:00', '', ''),
+(9, '', '', '', '00:00:00', '00:00:00', '', ''),
+(10, '', '', '', '00:00:00', '00:00:00', '', ''),
+(11, '', '', '', '00:00:00', '00:00:00', '', ''),
+(12, '', '', '', '00:00:00', '00:00:00', '', ''),
+(13, '', '', '', '00:00:00', '00:00:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -123,7 +137,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_email`, `user_password`) VALUES
-(1, 'user@gmail.com', 'user123');
+(1, 'user@gmail.com', 'user123'),
+(5, '', ''),
+(6, '', ''),
+(7, '', ''),
+(8, 'bryanbest123@gmail.com', '123');
 
 --
 -- Indexes for dumped tables
@@ -134,14 +152,15 @@ INSERT INTO `users` (`user_id`, `user_email`, `user_password`) VALUES
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`menu_id`),
-  ADD KEY `restaurant_id` (`restaurant_id`);
+  ADD KEY `menu_ibfk_1` (`restaurant_id`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `menu_id` (`menu_id`);
+  ADD KEY `menu_id` (`menu_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `restaurants`
@@ -169,19 +188,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `restaurant_admin`
@@ -193,7 +212,7 @@ ALTER TABLE `restaurant_admin`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -203,13 +222,14 @@ ALTER TABLE `users`
 -- Constraints for table `menu`
 --
 ALTER TABLE `menu`
-  ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`);
+  ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`);
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`),
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

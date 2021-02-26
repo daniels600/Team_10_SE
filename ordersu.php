@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if (!isset($_SESSION["User"])) {
+        header('Location: log-in.php');
+    }
     $servername = "localhost";
     $username = "root";
     $password = "";
