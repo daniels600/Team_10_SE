@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: Lato;
+}
+
+body{
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(115deg, #F87C22 10%, #1C71FF 90%);
+}
+
+.form-box{
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin:8% auto;
+    background: #fff;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+.btn{
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #c9663e1f;
+    border-radius: 30px;
+}
+
+.button{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+
+}
+
+#btn-class{
+    top: 0;
+    left: 0;
+    position:absolute;
+    width: 110px;
+    height: 100%;
+    background:linear-gradient(115deg, #F87C22 10%, #1C71FF 90%);
+    border-radius: 30px;
+    transition: .5s;
+}
+
+.input-fields{
+    top: 180px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+
+.field{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #143877;
+    outline:none;
+    background: transparent;
+}
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(115deg, #F87C22 10%, #1C71FF 90%);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+.submit-btn:hover,
+.submit-btn:active{
+    background: -webkit-linear-gradient(left, #1C71FF 10%,#F87C22 90%);
+    border: 0;
+    outline: none;
+    color:#fff;
+    transition:all 0.4s;
+}
+
+.box-field{
+    margin: 30px 10px 30px 0;
+}
+
+#login{
+    left: 50px;
+}
+
+#register{
+    left: 450px;
+}
