@@ -17,7 +17,7 @@
         } 
         
         $id = $_SESSION["User"][1];
-        $mealn = $_GET["mealn"];
+        $mealn = ucwords($_GET["mealn"]);
         $mealp = $_GET["mealp"];
         $meali = $_GET['meali'];
         if ($meali=="") {

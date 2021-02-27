@@ -16,9 +16,12 @@
         $sql = "DELETE from menu where menu_id = $delete";
         $conn->query($sql);
     }
-    
+    $o ="meal_name";
+    if(isset($_GET["orderby"])){
+        $o =$_GET["orderby"];
+    }
     $sql = "SELECT `menu_id`,`meal_name`, `meal_price`, `meal_image` FROM `menu` 
-    WHERE `restaurant_id` = ".$_SESSION["User"][1];
+    WHERE `restaurant_id` = ".$_SESSION["User"][1]." Order By $o";
     $query = $conn->query($sql);
 
 ?>
@@ -26,9 +29,11 @@
     <body>
             <table>
                 <tr>
-                    <th>Meal Name</th>
-                    <th>Meal Price</th>
-                    <th>Picture</th>
+                <form>
+                    <th><button type = "submit" name = 'orderby' value ='meal_name'>Meal Name</button></th>
+                    <th><button type = "submit" name = 'orderby' value ='meal_price'>Meal Price</button</th>
+                </form>
+                <th>Picture</th>
                 </tr>
                 <?php
                     
