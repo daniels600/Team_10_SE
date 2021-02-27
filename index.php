@@ -7,7 +7,7 @@
         <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
         <header>
@@ -47,8 +47,7 @@
             </div>
         </section >
         <div class="loader"><span>Most Viewed</span></div>
-        <section class="view-food" >
-            
+        <section class="view-food" > 
             <div class="grid">
                 <div class="grid-item">
                     <div class="card">
