@@ -20,7 +20,7 @@
                   <img src="svg/Pizza icon.svg" alt="part_logo" id="pizzaicon">
               </div>
               <ul class="main-nav">
-                  <li><a href="index.html">Home</a></li>
+                  <li><a href="index.php">Home</a></li>
                   <li><a href="#">About</a></li>
                   <li><a href="log-in.html">Log In</a></li>
               </ul>  
