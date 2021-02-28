@@ -25,7 +25,12 @@ if(isset($_POST['submit'])){
             $_SESSION['user_loggedIn'] = true;
             $_SESSION['user_id'] = $id;
 
-            header("Location: index.php");
+            if(isset($_SESSION['ordering'])){
+                header("Location: ordersu.php?message=success");
+            }else{
+                header("Location: index.php");
+            }
+            
         }
 
 

@@ -1,22 +1,27 @@
 <?php
+//starting a session 
+session_start();
+
+
 include "config/db_conn.php";
 //creating an instance of db_connection 
 $db = new DB_connection();
 
-// if (!isset($_SESSION["User"])) {
-//     header('Location: log-in.php');
-// }
-
+$user_id = isset($_SESSION['user_id'])?$_SESSION['user_id'] : "";
 
 if(isset($_GET["delete"])){
     $delete= $_GET["delete"];
     $sql = "DELETE from orders where order_id = $delete";
     $db->connect()->query($sql);
 }
+
+//a query to select all the orders of a specific user or customer 
 $sql = "SELECT orders.order_id, menu.meal_name,menu.meal_price,restaurants.restaurant_name, 
-orders.created_at FROM `orders`, `menu` LEFT JOIN restaurants on 
+orders.created_at FROM orders, menu LEFT JOIN restaurants on 
 restaurants.restaurant_id = menu.restaurant_id WHERE menu.menu_id = orders.menu_id 
-and orders.user_id = 1";
+and orders.user_id = '$user_id'";
+
+//executing the query 
 $query = $db->connect()->query($sql);
 
     

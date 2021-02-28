@@ -4,46 +4,35 @@ session_start();
 
 include "config/db_conn.php";
 
+//checking for a post request to this page 
 if(isset($_POST['submit'])){
     $db = new DB_connection();
 
+    //sanitizing the data before storing in the database 
     $user_email = $db->connect()->real_escape_string($_POST['Email']);
     $user_password = $db->connect()->real_escape_string($_POST['Password']);
 
+    //Query to insert into the data 
     $sql = "INSERT INTO users(user_email, user_password) VALUES ('$user_email','$user_password')";
 
+    //Executing the query 
     $result =  $db->connect()->query($sql);
 
+    //Checking if the query is executed successfully
     if($result){
-        header("Location: log-in.php");
+        //redirecting based on if there is an ordering 
+        if(isset($_SESSION['ordering'])){
+            header("Location: log-in.php?ordering=yes");
+        }
+        else{
+            header("Location: log-in.php");
+        }
+       
     }
 
 
 }
-    // if(isset($_GET["Email"])){
-    //     if(isset($_GET["Name"])){
-    //         $name = $_GET["Name"];
-    //         $loc = $_GET["Location"];
-    //         $tel = $_GET["Tel"];
-    //         $open = $_GET["Open"];
-    //         $close = $_GET["Close"];
-    //         $email = $_GET["Email"];
-    //         $pass = $_GET["Password"];
-
-    //         $sql = "INSERT INTO `restaurants`(`restaurant_location`, `restaurant_name`, `restaurant_telephone`, `restaurant_opening_time`, `restauarant_closing_time`, `Email`, `Password`) 
-    //         VALUES ('$loc','$name','$tel','$open','$close','$email','$pass')";
-    //         $id = $conn->query($sql);
-    //     }else{
-    //         $email = $_GET["Email"];
-    //         $pass = $_GET["Password"];
-    //         $sql = "INSERT INTO `users`(`user_email`, `user_password`) VALUES ('$email','$pass')";
-    //         $id = $conn->query($sql);
-    //     }
-    //     if(isset($_GET["signup"])){
-    //         header('Location: log-in.php');
-    //     }
-    // }
-
+ 
 
 ?>
 <!DOCTYPE html>

@@ -47,8 +47,6 @@ if(isset($_POST['submit'])){
                 $id =  $row[0];
                 $password = $row[2];
                 
-                // echo $row[1] . $row[2] . "This".$admin_password;
-                // exit;
                 //checking admin email and verifying the password
                 if(($row[1] == $admin_email) && password_verify($admin_password,$password)){
 
@@ -67,11 +65,9 @@ if(isset($_POST['submit'])){
                         die(mysqli_error($db->connect()));
                         
                     }
-                    //header("Location: restaurant.php");
 
                 } else {
-                    //error message
-                    //return false;
+                   
                     echo $password;
                     exit;
                 }

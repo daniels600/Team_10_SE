@@ -1,19 +1,19 @@
 <?php
 
+//starting a session in this page
 session_start();
 
 $status = "";
 $mark =false;
 
+//checking if the session has been created for a signed in user 
 if(isset($_SESSION['user_loggedIn']) && isset($_SESSION['user_id'])) {
-
     $status = 'logout.php?logout=yes';
     $mark =true;
 }else{
     $status = 'sign-up.php';
     $mark= false;
 }
-
 
 
 ?>
