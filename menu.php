@@ -25,7 +25,7 @@
     if(isset($_GET["order"])){
         session_start();
         if (!isset($_SESSION["User"])) {
-            header('Location: log-in.php');
+            header('Location: sign-up.php');
         }
         $order = $_GET["order"];
         $sql = "INSERT INTO `orders`( `menu_id`, `user_id`) VALUES ($order,".$_SESSION["User"][1].")";

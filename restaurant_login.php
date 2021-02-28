@@ -1,16 +1,48 @@
 <?php
+session_start();
 
-//checking for a reset in the url to this page
-if(isset($_GET['reset'])){
-    $msg = "Password reset Successfully";
-}
+include "config/db_conn.php";
 
+if(isset($_POST['submit'])){
+    $db = new DB_connection();
 
-//checking for an error in the url to this page
-if(isset($_GET['error'])){
-    $err_msg = "Password reset unsuccessful!";
+    $admin_email = $db->connect()->real_escape_string($_POST['Email']);
+    $admin_password = $db->connect()->real_escape_string($_POST['Password']);
+
+    $sql = "SELECT restaurant_id, admin_email, admin_password FROM Restaurants WHERE  admin_email ='$admin_email'";
+    //Executing the query 
+    $result =  $db->connect()->query($sql);
+
+    if(!$result){
+        
+        die(mysqli_error($db->connect()));
+    } 
+
+    else{
+
+        //Checking if query brought a result or affected a row
+        if(mysqli_num_rows($result) == 0){
+            return false;
+        } else {
+            $row = $result->fetch_array();
+            
+            //creating variables for the fields from the DB
+            $id =  $row[0];
+            $password = $row[2];
+            
+            //checking admin email and verifying the password
+            if(($row[1] == $admin_email) && password_verify($admin_password,$password)){
+                $_SESSION['admin_id'] = $id;
+
+                header('Location: restaurant_menu.php');
+            }
+
+        }
+    }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,7 +67,7 @@ if(isset($_GET['error'])){
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Password Reset</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Admin Login</h3></div>
                                     <div class="card-body">
                                     <?php 
                                     // showing the error message
@@ -57,22 +89,17 @@ if(isset($_GET['error'])){
                                         ?>
                                         <div class="small mb-3 text-muted">Enter your email address and new password.</div>
                                         <!-- form validation using parsley js -->
-                                        <form action='./../actions/reset_password.php' method="POST" data-parsley-validate>
+                                        <form action='<?php echo $_SERVER['PHP_SELF']; ?>' method="POST" data-parsley-validate>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required data-parsley-trigger="keyup" name='email'/>
+                                                <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required data-parsley-trigger="keyup" name='Email'/>
                                             </div>
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputPassword">New password</label>
-                                                <input class="form-control py-4" id="new_password" type="password" aria-describedby="emailHelp" placeholder="Enter new password" data-parsley-trigger="keyup" data-parsley-minlength="6" data-parsley-maxlength="16" name='new_password' required/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputPassword">Confirm Password</label>
-                                                <input class="form-control py-4" id="inputPassword" type="password"  placeholder="Confirm password" data-parsley-equalto="#new_password" data-parsley-trigger="keyup" data-parsley-minlength="6" data-parsley-maxlength="16" data-parsley-error-message='Passwords are not the same' required name='confirm_password'/>
+                                                <label class="small mb-1" for="inputPassword">Enter password</label>
+                                                <input class="form-control py-4" id="new_password" type="password" aria-describedby="emailHelp" placeholder="Enter new password" data-parsley-trigger="keyup" data-parsley-minlength="6" data-parsley-maxlength="16" name='Password' required/>
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="/index.php">Return to login</a>
-                                                <button class="btn btn-primary" name= "submit" href="reset_password.php">Reset Password</button>
+                                                <button class="btn btn-primary" name= "submit" href="reset_password.php">Login</button>
                                             </div>
                                         </form>
                                     </div>
@@ -86,7 +113,7 @@ if(isset($_GET['error'])){
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Eugene Daniels 2020</div>
+                            <div class="text-muted">Copyright &copy; Team 10 2021</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;

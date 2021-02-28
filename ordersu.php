@@ -5,36 +5,47 @@
     //creating an instance of db_connection 
     $db = new DB_connection();
 
-    if (!isset($_SESSION["User"])) {
-        header('Location: log-in.php');
+    if (!isset($_SESSION["user_loggedIn"])) {
+        header('Location: sign-up.php');
     }
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname ="team_10";
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname ="team_10";
     
-    // if(!($conn = new mysqli($servername, $username, $password, $dbname))){
-    //     alert("Connection has failed.");
-    // } 
-    if(isset($_GET["delete"])){
-        $delete= $_GET["delete"];
-        $sql = "DELETE from orders where order_id = $delete";
-        $db->connect()->query($sql);
+    if(isset($_GET['id'])){
+        $menu_id = $_GET['id'];
     }
-    $o ="meal_name";
-    if(isset($_GET["orderby"])){
-        $o =$_GET["orderby"];
+    $user_id = isset($_SESSION['user_id'])? $_SESSION['user_id'] : "";
+    $restaurant_id  =1;
+    $query = "INSERT INTO orders(restaurant_id,menu_id,user_id) VALUES('$restaurant_id','$menu_id','$user_id')";
+    $result = $db->connect()->query($query);
+
+    if($result){
+        header('Location: index.php?message=success');
+    }else{
+        header("Location: restaurant_menu.php");
     }
-    $sql = "SELECT orders.order_id, menu.meal_name,menu.meal_price,restaurants.restaurant_name, 
-    orders.created_at FROM `orders`, `menu` LEFT JOIN restaurants on 
-    restaurants.restaurant_id = menu.restaurant_id WHERE menu.menu_id = orders.menu_id 
-    and orders.user_id = ".$_SESSION["User"][1];
-    $query = $db->connect()->query($sql);
+    
+    // if(isset($_GET["delete"])){
+    //     $delete= $_GET["delete"];
+    //     $sql = "DELETE from orders where order_id = $delete";
+    //     $db->connect()->query($sql);
+    // }
+    // $o ="meal_name";
+    // if(isset($_GET["orderby"])){
+    //     $o =$_GET["orderby"];
+    // }
+    // $sql = "SELECT orders.order_id, menu.meal_name,menu.meal_price,restaurants.restaurant_name, 
+    // orders.created_at FROM `orders`, `menu` LEFT JOIN restaurants on 
+    // restaurants.restaurant_id = menu.restaurant_id WHERE menu.menu_id = orders.menu_id 
+    // and orders.user_id = ".$_SESSION["User"][1];
+    // $query = $db->connect()->query($sql);
 
     
 
 ?>
-<html>
+<!-- <html>
     <body>
         <form>
             <table>
@@ -47,17 +58,17 @@
                 </tr>
                 <?php
                     
-                    while($row = mysqli_fetch_array($query)){
-                        echo "<tr>
-                        <td>".$row['meal_name']."</td>
-                        <td>".$row['meal_price']."</td>
-                        <td>".$row['restaurant_name']."</td>
-                        <td>".$row['created_at']."</td>
-                        <td><button type='submit' name ='delete' value =".$row['order_id'].">Delete</button></td>
-                        </tr>";
-                    }
+                    // while($row = mysqli_fetch_array($query)){
+                    //     echo "<tr>
+                    //     <td>".$row['meal_name']."</td>
+                    //     <td>".$row['meal_price']."</td>
+                    //     <td>".$row['restaurant_name']."</td>
+                    //     <td>".$row['created_at']."</td>
+                    //     <td><button type='submit' name ='delete' value =".$row['order_id'].">Delete</button></td>
+                    //     </tr>";
+                    // }
                 ?>
             </table>
         <form>
     </body>
-</html>
+</html> -->

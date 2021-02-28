@@ -1,9 +1,15 @@
 <?php
+
+session_start();
+
 include "config/db_conn.php";
 //creating an instance of db_connection 
 $db = new DB_connection();
 
-$menuList = "select * from menu";
+
+$restaurant_id = isset($_SESSION['admin_id'])? $_SESSION['admin_id'] : "";
+
+$menuList = "select * from menu where restaurant_id = '$restaurant_id'";
 
 $result = $db->connect()->query($menuList);
 
@@ -53,9 +59,9 @@ $result = $db->connect()->query($menuList);
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <!-- <a class="dropdown-item" href="./views/settings.php">Settings</a> -->
-                    <a class="dropdown-item" href="./views/password.php">Reset Password</a>
+                    <!-- <a class="dropdown-item" href="./views/password.php">Reset Password</a> -->
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="Dashboard.php?logout">Logout</a>
+                    <a class="dropdown-item" href="logout.php?logout=yes">Logout</a>
                 </div>
             </li>
         </ul>
@@ -124,7 +130,7 @@ $result = $db->connect()->query($menuList);
                                         ?><?php
                                                 echo'
                                                 <tr>
-                                                    <td>'.'<img src='."$image_src".' alt="" border=3 height=100 width=300></img>'.'</td>
+                                                    <td>'.'<img src='."$image_src".' alt="" border=3 height=100 width=200></img>'.'</td>
                                                     <td>'.$row['meal_name'].'</td>
                                                     <td>'.'₵'.$row['meal_price'].'</td>
                                                     <td>'.'<a class="btn btn-success" href="edit_meal.php?edit=success&id='.$row['menu_id'].'" role="button"><i class="fas fa-edit"></i></a><span>  </span><a class="btn btn-danger" href="deleteMeal.php?id='.$row['menu_id'].'" role="button"><i class="fas fa-trash-alt"></i></a>'.'</td>

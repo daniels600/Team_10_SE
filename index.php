@@ -1,3 +1,26 @@
+<?php
+
+session_start();
+
+$status = "";
+$mark =false;
+
+if(isset($_SESSION['user_loggedIn']) && isset($_SESSION['user_id'])) {
+
+    $status = 'logout.php?logout=yes';
+    $mark =true;
+}else{
+    $status = 'sign-up.php';
+    $mark= false;
+}
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,6 +31,7 @@
         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </head>
     <body>
         <header>
@@ -20,10 +44,13 @@
                   <img src="svg/Pizza icon.svg" alt="part_logo" id="pizzaicon">
               </div>
               <ul class="main-nav">
-                  <li><a href="index.html">Home</a></li>
+                  <li><a href="index.php">Home</a></li>
+                  <li><a href="restaurant_admin_signup.php">Restaurant</a></li>
                   <li><a href="#">Menu</a></li>
                   <li><a href="#">Orders</a></li>
-                  <li><a href="#">About</a></li>
+                  <li><a href="<?php if($mark == true){echo $status;} else{echo $status;}?>"> 
+                  <?php if($mark == true){echo "Logout";} else{echo "Login/Signup";}?>
+                  </a></li>
               </ul>  
             </div>
             
@@ -55,9 +82,9 @@
                         <div class="card-container">
                             <h1 class="card-header">Burger</h1>
                             <p class="card-text">
-                                Short Description
+                                Price - <span>&#8373;</span> 80
                             </p>
-                            <input type="submit" class="card-btn" value="Pick me" name = "Pick">
+                            <a class="card-btn" value="Pick me" href="ordersu.php?id=1" name = "Pick">Pick me</a>
                         </div>
                     </div>
                 </div>  
@@ -67,7 +94,7 @@
                         <div class="card-container">
                             <h1 class="card-header">Samosa</h1>
                             <p class="card-text">
-                                Short Description
+                            Price - <span>&#8373;</span> 25
                             </p>
                             <input type="submit" class="card-btn" value="Pick me" name = "Pick">
                         </div>
@@ -77,9 +104,9 @@
                     <div class="card">
                         <img class="card-img" src="img/Rice.jpg" alt="Rice">
                         <div class="card-container">
-                            <h1 class="card-header">Rice</h1>
+                            <h1 class="card-header">Fried Rice</h1>
                             <p class="card-text">
-                                Short Description
+                            Price - <span>&#8373;</span> 30
                             </p>
                             <input type="submit" class="card-btn" value="Pick me" name = "Pick">
                         </div>
@@ -91,7 +118,7 @@
                         <div class="card-container">
                             <h1 class="card-header">Banku & Tilpia</h1>
                             <p class="card-text">
-                                Short Description
+                            Price - <span>&#8373;</span> 45
                             </p>
                             <input type="submit" class="card-btn" value="Pick me" name = "Pick">
                         </div>
@@ -107,7 +134,7 @@
                         <div class="card-container">
                             <h1 class="card-header">Fufu</h1>
                             <p class="card-text">
-                                Short Description
+                            Price - <span>&#8373;</span> 30
                             </p>
                             <input type="submit" class="card-btn" value="Pick me" name = "Pick">
                         </div>
@@ -119,7 +146,7 @@
                         <div class="card-container">
                             <h1 class="card-header">Jollof</h1>
                             <p class="card-text">
-                                Short Description
+                            Price - <span>&#8373;</span> 40
                             </p>
                             <input type="submit" class="card-btn" value="Pick me" name = "Pick">
                         </div>
@@ -131,7 +158,7 @@
                         <div class="card-container">
                             <h1 class="card-header">Waakye</h1>
                             <p class="card-text">
-                                Short Description
+                            Price - <span>&#8373;</span> 20
                             </p>
                             <input type="submit" class="card-btn" value="Pick me" name = "Pick">
                         </div>
@@ -143,7 +170,7 @@
                         <div class="card-container">
                             <h1 class="card-header">Kebab</h1>
                             <p class="card-text">
-                                Short Description
+                            Price - <span>&#8373;</span> 15
                             </p>
                             <input type="submit" class="card-btn" value="Pick me" name = "Pick">
                         </div>
@@ -151,5 +178,26 @@
                 </div>
             </div>
         </section>
+        <?php if(isset($_GET['message'])) : ?>
+        <div class='flash-data' data-flashdata="<? $_GET['message'];?>"></div>
+        <?php endif; ?>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script>
+        const flashdata = $('.flash-data').data('flashdata');
+
+        if(flashdata) {
+            Swal.fire({
+                icon:'success',
+                type: 'success',
+                title: 'Order Accepted',
+                text: 'Your order has been placed',
+                    
+            }).then(function () {
+                window.location.href = 'index.php';
+            });
+        }
+        
+        
+        </script>
     </body>
 </html>
